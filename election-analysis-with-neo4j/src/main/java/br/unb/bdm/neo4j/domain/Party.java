@@ -1,7 +1,7 @@
 package br.unb.bdm.neo4j.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.Index;
@@ -20,15 +20,15 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * @author Mark Angrish
+ * @author Frederico Costa
  */
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "cpf")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @NodeEntity
 @NoArgsConstructor
 @RequiredArgsConstructor
 @EqualsAndHashCode
 @ToString
-public class Person implements Donor {
+public class Party {
 
 	@GraphId private Long graphId;
 	
@@ -41,15 +41,21 @@ public class Person implements Donor {
 	@Getter
 	@Setter
 	@NonNull
-	@Index(unique = true)
-	private String cpf;
+	@Index(unique=true)
+	private String name;
 
 	@Getter
 	@Setter
 	@NonNull
-	private String name;
+	@Index(unique=true)
+	private String initials;
 
-	@Relationship(type = "DONATES_TO", direction = Relationship.OUTGOING)
-	private List<Donation> givenDonations = new ArrayList<>();
+	@Relationship(type = "MEMBER_OF", direction = Relationship.INCOMING)
+	private Set<Candidate> candidates = new HashSet<>();
 
+	@Relationship(type = "BELONGS_TO", direction = Relationship.INCOMING)
+	private Set<Directory> directories = new HashSet<>();
+
+	@Relationship(type = "BELONGS_TO", direction = Relationship.INCOMING)
+	private Set<FinancialCommittee> financialCommittees = new HashSet<>();
 }

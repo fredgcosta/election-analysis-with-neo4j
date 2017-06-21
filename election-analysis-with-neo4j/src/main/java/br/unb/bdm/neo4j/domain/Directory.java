@@ -11,25 +11,13 @@ import org.neo4j.ogm.annotation.Relationship;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 
-/**
- * @author Mark Angrish
- */
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "cpf")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @NodeEntity
-@NoArgsConstructor
-@RequiredArgsConstructor
-@EqualsAndHashCode
-@ToString
-public class Person implements Donor {
-
+public class Directory implements Donor, Donee{
 	@GraphId private Long graphId;
 	
 	@Getter
@@ -37,19 +25,20 @@ public class Person implements Donor {
 	@NonNull
 	@Index(unique = true)
 	private Long id;
-
 	@Getter
 	@Setter
 	@NonNull
 	@Index(unique = true)
-	private String cpf;
-
+	private String cnpj;
 	@Getter
 	@Setter
 	@NonNull
-	private String name;
+	private String type;
+	
 
-	@Relationship(type = "DONATES_TO", direction = Relationship.OUTGOING)
+	@Relationship(type = "DONATES_TO", direction = Relationship.INCOMING)
+	private List<Donation> receivedDonations = new ArrayList<>();
+
+	@Relationship(type = "DONATES_TO")
 	private List<Donation> givenDonations = new ArrayList<>();
-
 }

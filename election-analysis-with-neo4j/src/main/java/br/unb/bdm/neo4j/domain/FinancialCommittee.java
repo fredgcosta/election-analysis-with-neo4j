@@ -20,15 +20,15 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * @author Mark Angrish
+ * @author Frederico Costa
  */
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "cpf")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @NodeEntity
 @NoArgsConstructor
 @RequiredArgsConstructor
 @EqualsAndHashCode
 @ToString
-public class Person implements Donor {
+public class FinancialCommittee implements Donor, Donee {
 
 	@GraphId private Long graphId;
 	
@@ -37,19 +37,18 @@ public class Person implements Donor {
 	@NonNull
 	@Index(unique = true)
 	private Long id;
-
 	@Getter
 	@Setter
 	@NonNull
-	@Index(unique = true)
-	private String cpf;
-
+	private String cnpj;
 	@Getter
 	@Setter
 	@NonNull
-	private String name;
+	private String type;
+
+	@Relationship(type = "DONATES_TO", direction = Relationship.INCOMING)
+	private List<Donation> receivedDonations = new ArrayList<>();
 
 	@Relationship(type = "DONATES_TO", direction = Relationship.OUTGOING)
 	private List<Donation> givenDonations = new ArrayList<>();
-
 }
