@@ -72,8 +72,12 @@ public class Candidate implements Donor, Donee {
 	private State runsForDistrictDeputyIn;
 
 	@Relationship(type = "DONATES_TO", direction = Relationship.INCOMING)
+	@Getter
+	@Setter
 	private List<Donation> receivedDonations = new ArrayList<>();
 
 	@Relationship(type = "DONATES_TO", direction = Relationship.OUTGOING)
+	@Getter
+	@Setter
 	private List<Donation> givenDonations = new ArrayList<>();
 }
