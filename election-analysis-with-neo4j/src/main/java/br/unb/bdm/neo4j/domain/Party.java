@@ -22,32 +22,33 @@ import lombok.ToString;
 /**
  * @author Frederico Costa
  */
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "initials")
 @NodeEntity
 @NoArgsConstructor
 @RequiredArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(of={"id", "name", "initials"})
 @ToString
 public class Party {
 
-	@GraphId private Long graphId;
-	
+	@GraphId
+	private Long graphId;
+
 	@Getter
 	@Setter
 	@NonNull
 	@Index(unique = true)
-	private Long id;
+	private String id;
 
 	@Getter
 	@Setter
 	@NonNull
-	@Index(unique=true)
+	@Index(unique = true)
 	private String name;
 
 	@Getter
 	@Setter
 	@NonNull
-	@Index(unique=true)
+	@Index(unique = true)
 	private String initials;
 
 	@Relationship(type = "MEMBER_OF", direction = Relationship.INCOMING)

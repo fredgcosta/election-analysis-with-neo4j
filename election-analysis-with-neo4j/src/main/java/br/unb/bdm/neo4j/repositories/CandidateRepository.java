@@ -10,7 +10,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import br.unb.bdm.neo4j.domain.Candidate;
 
 @RepositoryRestResource(collectionResourceRel = "candidates", path = "candidates")
-public interface CandidateRepository extends GraphRepository<Candidate>{
+public interface CandidateRepository extends GraphRepository<Candidate> {
 
 	Candidate findByName(@Param("name") String name);
 
@@ -41,7 +41,6 @@ public interface CandidateRepository extends GraphRepository<Candidate>{
 	@Query("MATCH (c:Candidate)-[r:RUNS_FOR_DISTRICT_DEPUTY_IN]-(s:State initials:{initials}) RETURN c,r,s LIMIT {limit}")
 	Collection<Candidate> findDistrictDeputyCandidatesByState(@Param("initials") String initials,
 			@Param("limit") int limit);
-
 
 	@Query("MATCH (m:Candidate)<-[r:DONATES_TO]-(a) RETURN m,r,a LIMIT {limit}")
 	Collection<Candidate> graph(@Param("limit") int limit);

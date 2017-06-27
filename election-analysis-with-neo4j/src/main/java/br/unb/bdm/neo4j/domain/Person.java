@@ -26,17 +26,11 @@ import lombok.ToString;
 @NodeEntity
 @NoArgsConstructor
 @RequiredArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(of={"cpf", "name"})
 @ToString
 public class Person implements Donor {
 
 	@GraphId private Long graphId;
-	
-	@Getter
-	@Setter
-	@NonNull
-	@Index(unique = true)
-	private Long id;
 
 	@Getter
 	@Setter

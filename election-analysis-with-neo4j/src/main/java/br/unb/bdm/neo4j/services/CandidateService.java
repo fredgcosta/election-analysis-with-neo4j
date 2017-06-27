@@ -32,35 +32,35 @@ public class CandidateService {
 		List<Map<String, Object>> rels = new ArrayList<>();
 		int i = 0;
 		Iterator<Candidate> result = candidates.iterator();
-		while (result.hasNext()) {
-			Candidate candidate = result.next();
-			nodes.add(map("name", candidate.getName(), "label", "candidate"));
-			int target = i;
-			i++;
-			for (Donation receivedDonation : candidate.getReceivedDonations()) {
-
-				Donor donorInstance = receivedDonation.getDonor();
-				Map<String, Object> donor = null;
-				if (donorInstance instanceof Company) {
-					donor = map("id", ((Company) receivedDonation.getDonor()).getCnpj(), "label", "Company");
-				} else if (donorInstance instanceof Person) {
-					donor = map("id", ((Person) receivedDonation.getDonor()).getCpf(), "label", "Person");
-				} else if (donorInstance instanceof Candidate) {
-					donor = map("id", ((Candidate) receivedDonation.getDonor()).getCnpj(), "label", "Candidate");
-				} else if (donorInstance instanceof Directory) {
-					donor = map("id", ((Directory) receivedDonation.getDonor()).getCnpj(), "label", "Directory");
-				} else if (donorInstance instanceof FinancialCommittee) {
-					donor = map("id", ((FinancialCommittee) receivedDonation.getDonor()).getCnpj(), "label",
-							"FinancialCommittee");
-				}
-				int source = nodes.indexOf(donor);
-				if (source == -1) {
-					nodes.add(donor);
-					source = i++;
-				}
-				rels.add(map("source", source, "target", target));
-			}
-		}
+//		while (result.hasNext()) {
+//			Candidate candidate = result.next();
+//			nodes.add(map("name", candidate.getName(), "label", "candidate"));
+//			int target = i;
+//			i++;
+//			for (Donation receivedDonation : candidate.getReceivedDonations()) {
+//
+//				Donor donorInstance = receivedDonation.getDonor();
+//				Map<String, Object> donor = null;
+//				if (donorInstance instanceof Company) {
+//					donor = map("id", ((Company) receivedDonation.getDonor()).getCnpj(), "label", "Company");
+//				} else if (donorInstance instanceof Person) {
+//					donor = map("id", ((Person) receivedDonation.getDonor()).getCpf(), "label", "Person");
+//				} else if (donorInstance instanceof Candidate) {
+//					donor = map("id", ((Candidate) receivedDonation.getDonor()).getCnpj(), "label", "Candidate");
+//				} else if (donorInstance instanceof Directory) {
+//					donor = map("id", ((Directory) receivedDonation.getDonor()).getCnpj(), "label", "Directory");
+//				} else if (donorInstance instanceof FinancialCommittee) {
+//					donor = map("id", ((FinancialCommittee) receivedDonation.getDonor()).getCnpj(), "label",
+//							"FinancialCommittee");
+//				}
+//				int source = nodes.indexOf(donor);
+//				if (source == -1) {
+//					nodes.add(donor);
+//					source = i++;
+//				}
+//				rels.add(map("source", source, "target", target));
+//			}
+//		}
 		return map("nodes", nodes, "links", rels);
 	}
 
@@ -71,14 +71,14 @@ public class CandidateService {
 		return result;
 	}
 
-	@Transactional(readOnly = true)
-	public Map<String, Object> graph(int limit) {
-		Collection<Candidate> result = candidateRepository.graph(limit);
-		return toD3Format(result);
-	}
+//	@Transactional(readOnly = true)
+//	public Map<String, Object> graph(int limit) {
+//		Collection<Candidate> result = candidateRepository.graph(limit);
+//		return toD3Format(result);
+//	}
 	
-	public Map<String, Object>  getByParty(String initials) {
-				Collection<Candidate> result = candidateRepository.findByParty(initials, 0);
-		return toD3Format(result);
-	}
+//	public Map<String, Object>  getByParty(String initials) {
+//				Collection<Candidate> result = candidateRepository.findByParty(initials, 0);
+//		return toD3Format(result);
+//	}
 }

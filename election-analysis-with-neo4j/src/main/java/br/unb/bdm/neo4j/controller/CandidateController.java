@@ -22,8 +22,8 @@ public class CandidateController {
 		this.candidateService = candidateService;
 	}
 
-	@RequestMapping("/graph")
-	public Map<String, Object> graph(@RequestParam(value = "limit",required = false) Integer limit) {
-		return candidateService.graph(limit == null ? 100 : limit);
-	}
+//	@RequestMapping("/graph")
+//	public Map<String, Object> graph(@RequestParam(value = "limit",required = false) Integer limit) {
+//		return candidateService.graph(limit == null ? 100 : limit);
+//	}
 }

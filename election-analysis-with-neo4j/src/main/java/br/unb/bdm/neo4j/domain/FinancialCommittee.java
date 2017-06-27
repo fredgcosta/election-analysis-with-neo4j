@@ -22,16 +22,17 @@ import lombok.ToString;
 /**
  * @author Frederico Costa
  */
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "cnpj")
 @NodeEntity
 @NoArgsConstructor
 @RequiredArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(of = { "id", "cnpj", "type" })
 @ToString
 public class FinancialCommittee implements Donor, Donee {
 
-	@GraphId private Long graphId;
-	
+	@GraphId
+	private Long graphId;
+
 	@Getter
 	@Setter
 	@NonNull

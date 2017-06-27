@@ -26,16 +26,17 @@ import lombok.ToString;
 @NodeEntity
 @NoArgsConstructor
 @RequiredArgsConstructor
-@EqualsAndHashCode
+@EqualsAndHashCode(of = { "id", "cnpj", "name" })
 @ToString
 public class Company implements Donor {
-	@GraphId private Long graphId;
-	
+	@GraphId
+	private Long graphId;
+
 	@Getter
 	@Setter
 	@NonNull
 	@Index(unique = true)
-	private Long id;
+	private String id;
 
 	@Getter
 	@Setter

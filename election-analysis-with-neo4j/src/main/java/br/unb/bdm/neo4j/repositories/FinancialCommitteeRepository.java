@@ -5,6 +5,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import br.unb.bdm.neo4j.domain.FinancialCommittee;
 
-@RepositoryRestResource(collectionResourceRel = "candidates", path = "candidates")
+@RepositoryRestResource(collectionResourceRel = "financial-committees", path = "financial-committees")
 public interface FinancialCommitteeRepository extends GraphRepository<FinancialCommittee> {
 }
