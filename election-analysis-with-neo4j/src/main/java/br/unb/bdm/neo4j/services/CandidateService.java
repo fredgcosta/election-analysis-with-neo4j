@@ -8,17 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import br.unb.bdm.neo4j.domain.Candidate;
-import br.unb.bdm.neo4j.domain.Company;
-import br.unb.bdm.neo4j.domain.Directory;
-import br.unb.bdm.neo4j.domain.Donation;
-import br.unb.bdm.neo4j.domain.Donor;
-import br.unb.bdm.neo4j.domain.FinancialCommittee;
-import br.unb.bdm.neo4j.domain.Person;
 import br.unb.bdm.neo4j.repositories.CandidateRepository;
 
 @Service
